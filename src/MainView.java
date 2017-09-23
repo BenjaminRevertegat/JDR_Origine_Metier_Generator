@@ -1,7 +1,9 @@
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,12 +20,21 @@ public class MainView implements ActionListener, Observer {
 	private JDRController controller = null;
 	private Model model = null;
 	private JFrame frame = null;
+	private JPanel mainPane = null;
 	private JPanel contentPane = null;
+	
+	private JPanel originePane = null;
+	private JPanel metierPane = null;
+	
 	private JFormattedTextField Couragefield = null;
 	private JFormattedTextField Intelligencefield = null;
 	private JFormattedTextField Charismefield = null;
 	private JFormattedTextField Adressefield = null;
 	private JFormattedTextField Forcefield = null;
+	
+	private String listOrigine;
+	private String listMetier;
+	
 	private JButton button = null;
 	private NumberFormat format = null;
 
@@ -42,8 +53,12 @@ public class MainView implements ActionListener, Observer {
 		frame = new JFrame();
 		frame.setLocation(300, 500);
 		frame.setSize(800, 450);
+		mainPane = new JPanel();
+		mainPane.setLayout(new GridLayout(1, 3));
 		contentPane = new JPanel();
 		contentPane.setLayout(new GridLayout(6, 2));
+		
+		
 		format = NumberFormat.getNumberInstance();
 		format.setParseIntegerOnly(true);
 		format.setGroupingUsed(false);
@@ -93,9 +108,51 @@ public class MainView implements ActionListener, Observer {
 		button = new JButton("Générer");
 		button.addActionListener(this);
 		contentPane.add(button);
-		frame.setContentPane(contentPane);
+		
+		buildOrigineFrame();
+		buildMetierFrame();
+		
+		mainPane.add(contentPane);
+		mainPane.add(originePane);
+		mainPane.add(metierPane);
+		
+		frame.setContentPane(mainPane);
 		frame.setTitle("JDR - Generator");
 		frame.pack();
+	}
+	
+	private void buildOrigineFrame() {
+		
+		originePane = new JPanel();
+		originePane.setLayout(new FlowLayout());
+		
+		JLabel origine = new JLabel("Origine possible :");
+		originePane.add(origine);
+		
+		if (Model.getOriginePossible() != null)
+		{
+			for (int i=0; i < Model.getOriginePossible().size() ; i++ )
+			{
+				JLabel currentOrigine = new JLabel(Model.getOriginePossible().get(i).getNom());
+				originePane.add(currentOrigine);
+			}
+		}
+		
+	}
+	
+	private void buildMetierFrame() {
+		metierPane = new JPanel();
+		metierPane.setLayout(new FlowLayout());
+		JLabel metier = new JLabel("Metier possible :");
+		metierPane.add(metier);
+		if (Model.getMetierPossible() != null)
+		{
+			for (int i=0; i < Model.getMetierPossible().size() ; i++ )
+			{
+				JLabel currentMetier = new JLabel(Model.getMetierPossible().get(i).getNom());
+				metierPane.add(currentMetier);
+			}
+		}
 	}
 
 	public void close() {
@@ -119,10 +176,12 @@ public class MainView implements ActionListener, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (arg instanceof Integer)
-		{
-			//field.setValue((Integer) arg);
-		}
-		System.out.println("[MainView] : update");
+		mainPane.remove(originePane);
+		mainPane.remove(metierPane);
+		buildOrigineFrame();
+		buildMetierFrame();
+		mainPane.add(originePane);
+		mainPane.add(metierPane);
+		frame.setVisible(true);
 	}
 }

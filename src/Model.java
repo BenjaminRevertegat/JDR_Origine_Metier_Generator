@@ -206,104 +206,118 @@ public class Model extends Observable{
 		currentP = new Possibility("Guerrier");
 		currentP.getMyCarac().add(new Caracteristique("Courage",12,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Force",12,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Gladiateur");
 		currentP.getMyCarac().add(new Caracteristique("Courage",12,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Force",12,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Ninja");
 		currentP.getMyCarac().add(new Caracteristique("Adresse",13,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Assassin");
 		currentP.getMyCarac().add(new Caracteristique("Adresse",13,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Voleur");
 		currentP.getMyCarac().add(new Caracteristique("Adresse",12,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Prêtre");
 		currentP.getMyCarac().add(new Caracteristique("Charisme",12,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Mage");
 		currentP.getMyCarac().add(new Caracteristique("Intelligence",12,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Sorcier");
 		currentP.getMyCarac().add(new Caracteristique("Intelligence",12,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Paladin");
 		currentP.getMyCarac().add(new Caracteristique("Courage",12,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Intelligence",10,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Charisme",11,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Force",9,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Ranger");
 		currentP.getMyCarac().add(new Caracteristique("Charisme",10,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Adresse",10,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Ménestrel");
 		currentP.getMyCarac().add(new Caracteristique("Charisme",12,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Adresse",11,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Marchand");
 		currentP.getMyCarac().add(new Caracteristique("Intelligence",12,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Charisme",11,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Négociant");
 		currentP.getMyCarac().add(new Caracteristique("Intelligence",12,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Charisme",11,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Ingénieur");
 		currentP.getMyCarac().add(new Caracteristique("Adresse",11,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Pirate");
 		currentP.getMyCarac().add(new Caracteristique("Courage",11,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Adresse",11,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Bourgeois");
 		currentP.getMyCarac().add(new Caracteristique("Intelligence",10,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Charisme",11,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 		currentP = new Possibility("Noble");
 		currentP.getMyCarac().add(new Caracteristique("Intelligence",10,MAX));
 		currentP.getMyCarac().add(new Caracteristique("Charisme",11,MAX));
-		Origine.add(currentP);
+		Metier.add(currentP);
 		
 	}
 	
 	public void setPerso(Personnage perso) {
 		this.perso = perso;
+		
 		CheckPerso();
 		
-		System.out.println(" # Origine :");
+		System.out.println(" - Origine :");
 		
 		for (int i=0; i < OriginePossible.size(); i++)
 		{
 			System.out.println( OriginePossible.get(i).getNom() );
 		}
-		System.out.println(" # Métier :");
+		
+		System.out.println(" - Métier :");
 		
 		for (int i=0; i < MetierPossible.size(); i++)
 		{
 			System.out.println( MetierPossible.get(i).getNom() );
 		}
-	//	setChanged();
-	//	notifyObservers(this.OriginePossible);
-	//	notifyObservers(this.MetierPossible);
+		setChanged();
+		notifyObservers(this.OriginePossible);
+		notifyObservers(this.MetierPossible);
 	}
+
+
+	public static ArrayList<Possibility> getOriginePossible() {
+		return OriginePossible;
+	}
+
+
+	public static ArrayList<Possibility> getMetierPossible() {
+		return MetierPossible;
+	}
+	
+	
 	
 }

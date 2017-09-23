@@ -15,8 +15,6 @@ public class Main {
 		controller.init(mView);
 		controller.displayViews();
 		
-		
-		
 	}
 	
 	
